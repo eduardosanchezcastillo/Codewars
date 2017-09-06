@@ -1,0 +1,824 @@
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.function.Consumer;
+import java.util.function.ToIntFunction;
+
+class MineSweeper {
+
+    //TODO: remove both
+    public static final int MINE = -1;
+    public static final int UNKNOWN = -2;
+
+    private final Board board;
+
+    private final Set<CellPosition> finishedCells = new HashSet<>();  // TODO: move to Brain
+
+    public MineSweeper(final String board, final int nMines) {
+        this.board = new Board(board, nMines);
+    }
+
+    public String solve() {
+        System.out.println();
+        System.out.println("=========================================");
+        logBoard("Input board:");
+
+        Brain brain = new Brain(board, finishedCells, pos -> Game.open(pos.x, pos.y));
+
+        // The order is important here!
+        Approach approaches[] = {
+                brain::processAllRemainingAreMines,
+                brain::processAllRemainingAreEmpty,
+                brain::processObvious,
+                brain::processLessObvious,  // TODO: see if this can be removed because we have the brute-force algorithm now
+                this::guessSomeMines,
+                brain::processAlmostKnownMines,
+                brain::bruteForceRemaining
+        };
+
+        int iteration = 1;  // TODO: remove
+        do {
+            board.reset();
+
+            for (Approach approach : approaches) {
+                approach.perform();
+                if (board.isChanged()) {
+                    break;
+                }
+            }
+
+            if (board.isChanged()) {
+                // logBoard(String.format("Iteration %d, remaining mines: %d", iteration++, board.getRemainingMinesCount()));
+            }
+        } while (board.isChanged() && board.getRemainingUnknownCellsCount() > 0);
+
+        // moment of truth
+        if (board.getRemainingMinesCount() == 0) {
+            return board.getBoardAsString();
+        } else {
+            logBoard("Can't solve this. Remaining mines: " + board.getRemainingMinesCount());
+            return "?";
+        }
+    }
+
+    //TODO: remove
+    private void logBoard(String message) {
+        System.out.println(message);
+        System.out.println(board.getBoardAsString()
+                .replaceAll("\\?", "·")
+                .replaceAll("0", " ")
+                .replaceAll("x", "\u001B[31mx\u001B[0m")
+        );
+        System.out.println("......................................");
+    }
+
+    private void guessSomeMines() {
+        for (int x = 0; x < board.getWidth(); x++) {
+            for (int y = 0; y < board.getHeight(); y++) {
+                if (!board.isNumber(x, y) || finishedCells.contains(new CellPosition(x, y))) {
+                    continue;
+                }
+                if (guessSomeMines(new CellData(board, x, y))) {
+                    return;
+                }
+            }
+        }
+    }
+
+    // TODO: move to Brain.
+    private boolean guessSomeMines(CellData cellData) {
+        if (cellData.remainingMinesCount == 0) {
+            return false;
+        }
+
+        //TODO: remove or uncomment
+        /*
+        if (cellData.remainingMinesCount != 1) {
+            return null;  // this method doesn't support more than remaining mine yet; see if we actually need to support this
+        }
+        */
+
+        // Try and put a mine in each of the available free cells around the specified cell;
+        // and then run the algorithm and see if there are any inconsistencies;
+        // If there is exactly one guess without inconsistencies, then we found a mine.
+        CellPosition minePosition = null;
+        for (CellPosition unknownCell : cellData.unknownCells) {
+            Board tempBoard = new Board(board, true);
+            Brain brain = new Brain(
+                    tempBoard,                              // don't mess with the original board; all the guesses will be done on this temporary board
+                    new HashSet<>(finishedCells),           // also, don't change this collection while guessing; therefore, pass a copy
+                    pos -> CellType.UNKNOWN_NUMBER.value()  // we can't use Game.open(...) here because our guesses could be wrong and we'll blow up
+            );
+
+            tempBoard.setMine(unknownCell.x, unknownCell.y);
+
+            do {
+                tempBoard.reset();
+                brain.processObvious();
+
+                if (!tempBoard.isChanged() && tempBoard.getRemainingMinesCount() > 0) {
+                    brain.processLessObvious();
+                }
+            } while (tempBoard.isValid() && tempBoard.isChanged() && tempBoard.getRemainingMinesCount() >= 0);
+
+            // validate the result
+            // TODO : move the validation to a separate method
+            if (validateGuess(brain, tempBoard)) {
+                if (minePosition != null) {
+                    // we already have a 'valid' guess saved, and here is one more. no way we can figure this out;
+                    return false;
+                }
+                minePosition = unknownCell;
+            } else {
+                // If we are here then MINE can't be in the guessed position. So this is definitely a non-MINE cell. Open it and get out
+                board.setNumber(unknownCell.x, unknownCell.y, Game.open(unknownCell.x, unknownCell.y));
+                return true;
+            }
+        }
+
+        if (minePosition != null) {
+            board.setMine(minePosition.x, minePosition.y);
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean validateGuess(Brain brain, Board board) {
+        if (!board.isValid() || board.getRemainingMinesCount() < 0 || board.getRemainingMinesCount() > board.getRemainingUnknownCellsCount()) {
+            return false;
+        }
+
+        if (board.getRemainingMinesCount() == 0) {
+            // see if all the number cells got enough MINEs
+            brain.iterateCells(
+                    board::isUnknown,
+                    unknownCell -> {
+                        CellData cd = new CellData(board, unknownCell);
+                        cd.numberCells.forEach(numberCell -> {
+                            CellData numberCD = new CellData(board, numberCell);
+                            if (numberCD.remainingMinesCount > 0) {
+                                board.setValid(false);
+                            }
+                        });
+                    }
+            );
+        }
+
+        // board's "valid" state could have changed as a result of some checks above
+        return board.isValid();
+    }
+
+    //TODO: remove
+    static int[][] parseBoard(String board) {
+        String[] rows = board.split("\n");
+        int cells[][] = new int[rows.length][];
+
+        for (int i = 0; i < rows.length; i++) {
+            cells[i] = Stream.of(rows[i].split(" "))
+                    .mapToInt(MineSweeper::convertBoardCell)
+                    .toArray();
+        }
+
+        return cells;
+    }
+
+    //TODO: remove
+    private static int convertBoardCell(String cell) {
+        switch (cell) {
+            case "x":
+                return MINE;
+            case "?":
+                return UNKNOWN;
+            default:
+                return Integer.valueOf(cell);
+        }
+    }
+}
+
+class Board {
+
+    private final int[][] cells;
+
+    private int remainingMinesCount;
+
+    private int remainingUnknownCellsCount;
+
+    private boolean changed;
+
+    private boolean autoValidate = false;
+
+    private boolean valid = true;
+
+    Board(String board, int nMines) {
+        cells = parseBoard(board);
+        remainingMinesCount = nMines;
+        remainingUnknownCellsCount = (int) Arrays.stream(cells).flatMapToInt(Arrays::stream)
+                .filter(CellHelper::isUnknown)
+                .count();
+        reset();
+    }
+
+    Board(Board other, boolean autoValidate) {
+        remainingMinesCount = other.remainingMinesCount;
+        remainingUnknownCellsCount = other.remainingUnknownCellsCount;
+
+        cells = new int[other.cells.length][];
+        for (int i = 0; i < other.cells.length; i++) {
+            cells[i] = Arrays.copyOf(other.cells[i], other.cells[i].length);
+        }
+
+        this.autoValidate = autoValidate;
+    }
+
+    int getWidth() {
+        return cells.length;
+    }
+
+    int getHeight() {
+        return cells[0].length;
+    }
+
+    int getValue(int x, int y) {
+        return cells[x][y];
+    }
+
+    boolean isNumber(int x, int y) {
+        return CellHelper.isNumber(cells[x][y]);
+    }
+
+    boolean isUnknown(int x, int y) {
+        return CellHelper.isUnknown(cells[x][y]);
+    }
+
+    boolean isMine(int x, int y) {
+        return CellHelper.isMine(cells[x][y]);
+    }
+
+    void setMine(int x, int y) {
+        set(x, y, CellType.MINE.value());
+        remainingMinesCount--;
+
+        if (autoValidate && valid) {
+            // 'Valid MINE' means that all surrounding KNOWN_NUMBER cells have a valid count of mines around them.
+            // If there are too many mines, the 'remaining mines' count will be negative.
+            CellData cellData = new CellData(this, x, y);
+            valid = cellData.numberCells.stream()
+                    .map(pos -> new CellData(this, pos))
+                    .noneMatch(numberCell -> numberCell.remainingMinesCount < 0);
+        }
+    }
+
+    void setNumber(int x, int y, int value) {
+        if (value < 0 && value != CellType.UNKNOWN_NUMBER.value()) {
+            throw new RuntimeException("Only non-negative values are allowed here!");
+        }
+        set(x, y, value);
+    }
+
+    void setUnknown(int x, int y) {
+        set(x, y, CellType.UNKNOWN.value());
+    }
+
+    private void set(int x, int y, int value) {
+        if (cells[x][y] != value) {
+            changed = true;
+            if (value == CellType.UNKNOWN.value()) {
+                remainingUnknownCellsCount++;
+            } else if (isUnknown(x, y)) {
+                remainingUnknownCellsCount--;
+            }
+        }
+        cells[x][y] = value;
+    }
+
+    boolean isChanged() {
+        return changed;
+    }
+
+    void reset() {
+        changed = false;
+    }
+
+    CellType getCellType(int x, int y) {
+        return CellHelper.getCellType(cells[x][y]);
+    }
+
+    int getRemainingMinesCount() {
+        return remainingMinesCount;
+    }
+
+    int getRemainingUnknownCellsCount() {
+        return remainingUnknownCellsCount;
+    }
+
+    boolean isValid() {
+        return valid;
+    }
+
+    void setValid(boolean valid) {
+        this.valid = valid;
+    }
+
+    private int[][] parseBoard(String board) {
+        String[] rows = board.split("\n");
+        int cells[][] = new int[rows.length][];
+
+        for (int i = 0; i < rows.length; i++) {
+            cells[i] = Stream.of(rows[i].split(" "))
+                    .mapToInt(CellHelper::convertBoardCell)
+                    .toArray();
+        }
+
+        return cells;
+    }
+
+    String getBoardAsString() {
+        return Arrays.stream(cells)
+                .map(row -> Arrays.stream(row)
+                        .mapToObj(CellHelper::convertBoardCell)
+                        .collect(Collectors.joining(" "))
+                )
+                .collect(Collectors.joining("\n"));
+    }
+}
+
+class CellHelper {
+    static boolean isNumber(int value) {
+        return value >= 0;
+    }
+
+    static boolean isUnknown(int value) {
+        return value == CellType.UNKNOWN.value();
+    }
+
+    static boolean isUnknownNumber(int value) {
+        return value == CellType.UNKNOWN_NUMBER.value();
+    }
+
+    static boolean isMine(int value) {
+        return value == CellType.MINE.value();
+    }
+
+    static CellType getCellType(int value) {
+        if (isNumber(value)) return CellType.KNOWN_NUMBER;
+        if (isMine(value)) return CellType.MINE;
+        if (isUnknownNumber(value)) return CellType.UNKNOWN_NUMBER;
+        return CellType.UNKNOWN;
+    }
+
+    static int convertBoardCell(String cell) {
+        switch (cell) {
+            case "x":
+                return CellType.MINE.value();
+            case "?":
+                return CellType.UNKNOWN.value();
+            default:
+                return Integer.valueOf(cell);
+        }
+    }
+
+    static String convertBoardCell(int value) {
+        switch (getCellType(value)) {
+            case MINE:
+                return "x";
+            case UNKNOWN:
+                return "?";
+            case UNKNOWN_NUMBER:
+                return "-";
+            default:
+                return String.valueOf(value);
+        }
+    }
+}
+
+enum CellType {
+    KNOWN_NUMBER(0),
+    MINE(-1),
+    UNKNOWN(-2),
+    UNKNOWN_NUMBER(-3);
+
+    private final int value;
+
+    CellType(int value) {
+        this.value = value;
+    }
+
+    public int value() {
+        return value;
+    }
+}
+
+/**
+ * Calculates all necessary data for particular cell using provided board view.
+ * Basically, contains info about current cell and all its surrounding cells.
+ */
+class CellData {
+
+    final List<CellPosition> unknownCells = new ArrayList<>();
+
+    final List<CellPosition> numberCells = new ArrayList<>();
+
+    final int remainingMinesCount;
+
+    CellData(Board board, int x, int y) {
+        int value = board.getValue(x, y);
+
+        int minesCount = 0;
+        SurroundingCells surroundingCells = new SurroundingCells(x, y, board.getWidth(), board.getHeight(), 1);
+        for (CellPosition cellPosition : surroundingCells) {
+            if (cellPosition.x == x && cellPosition.y == y) {
+                continue;
+            }
+            switch (board.getCellType(cellPosition.x, cellPosition.y)) {
+                case KNOWN_NUMBER:
+                    numberCells.add(cellPosition);
+                    break;
+                case MINE:
+                    minesCount++;
+                    break;
+                case UNKNOWN:
+                    unknownCells.add(cellPosition);
+                    break;
+            }
+        }
+
+        remainingMinesCount = value - minesCount;
+    }
+
+    CellData(Board board, CellPosition cellPos) {
+        this(board, cellPos.x, cellPos.y);
+    }
+
+    CellData(CellData other) {
+        unknownCells.addAll(other.unknownCells);
+        numberCells.addAll(other.numberCells);
+        remainingMinesCount = other.remainingMinesCount;
+    }
+}
+
+class CellPosition {
+    final int x;
+    final int y;
+
+    CellPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CellPosition that = (CellPosition) o;
+        return x == that.x && y == that.y;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = x;
+        result = 31 * result + y;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
+}
+
+@FunctionalInterface
+interface Approach {
+    void perform();
+}
+
+class Brain {
+
+    private final Board board;
+
+    private final Set<CellPosition> finishedCells;
+
+    private final ToIntFunction<CellPosition> cellValueProvider;
+
+    Brain(Board board, Set<CellPosition> finishedCells, ToIntFunction<CellPosition> cellValueProvider) {
+        this.board = board;
+        this.finishedCells = finishedCells;
+        this.cellValueProvider = cellValueProvider;
+    }
+
+    void processObvious() {
+        iterateCells(board::isNumber, this::processCell);
+    }
+
+    void processLessObvious() {
+        iterateCells(board::isNumber, this::processSurroundingCells, true);
+    }
+
+    void processAllRemainingAreMines() {
+        if (board.getRemainingMinesCount() > 0 && board.getRemainingMinesCount() == board.getRemainingUnknownCellsCount()) {
+            iterateCells(board::isUnknown, pos -> board.setMine(pos.x, pos.y));
+        }
+    }
+
+    void processAllRemainingAreEmpty() {
+        if (board.getRemainingUnknownCellsCount() > 0 && board.getRemainingMinesCount() == 0) {
+            iterateCells(board::isUnknown, pos -> board.setNumber(pos.x, pos.y, Game.open(pos.x, pos.y)));
+        }
+    }
+
+    void processAlmostKnownMines() {
+        List<CellPosition> numberCells = new ArrayList<>();
+        iterateCells(board::isNumber, numberCells::add);
+
+        int almostKnownCount = numberCells.stream()
+                .map(pos -> new CellData(board, pos))
+                .mapToInt(data -> data.remainingMinesCount)
+                .sum();
+        if (almostKnownCount == board.getRemainingMinesCount()) {
+            // We know that all remaining mines are somewhere near the unfinished number cells.
+            // Therefore, all other unknown cells are empty and can be opened safely.
+            // IMPORTANT: find all of them first, and then open.
+            List<CellPosition> emptyCells = new ArrayList<>();
+            iterateCells(
+                    board::isUnknown,
+                    pos -> {
+                        if (new CellData(board, pos).numberCells.isEmpty()) {
+                            emptyCells.add(pos);
+                        }
+                    }
+            );
+            openAll(emptyCells);
+        }
+    }
+
+    void iterateCells(CellFilterFunction filterFunction, Consumer<CellPosition> cellConsumer) {
+        iterateCells(filterFunction, cellConsumer, false);
+    }
+
+    // This is our last resort. Perform a limited brute-force trying to figure out which cells are definitely empty..
+    // and which ones are definitely mines.
+    void bruteForceRemaining() {
+        BruteForce bruteForce = new BruteForce(board);
+        AssumedCells assumedCells = bruteForce.run();
+        if (assumedCells != null) {
+            openAll(assumedCells.numbers);
+            markMines(assumedCells.mines);
+        }
+    }
+
+    class BruteForce {
+
+        private final Board board;
+
+        private final List<CellPosition> numberCells = new ArrayList<>();
+
+        private final Set<CellPosition> allUnknownCells;
+
+        private final LinkedList<CellPosition> mines = new LinkedList<>();
+
+        private AssumedCells bruteForcedCells;
+
+        BruteForce(Board board) {
+            iterateCells(board::isNumber, numberCells::add);
+            allUnknownCells = numberCells.stream()
+                    .map(pos -> new CellData(board, pos))
+                    .flatMap(cellData -> cellData.unknownCells.stream())
+                    .collect(Collectors.toSet());
+
+            this.board = new Board(board, true);
+        }
+
+        AssumedCells run() {
+            processCell(0);
+            return bruteForcedCells;
+        }
+
+        // IMPORTANT: recursive algorithm
+        private void processCell(int cellIndex) {
+            if (cellIndex == numberCells.size()) {
+                // all cells are processed and we are ready to collect the result
+                saveResult();
+                return;
+            }
+
+            if (isHopeless()) {
+                return;
+            }
+
+            // calculate all possible mine positions for the next number cell
+            CellData cellData = new CellData(board, numberCells.get(cellIndex));
+            nextMine(cellData.unknownCells, 0, cellData.remainingMinesCount, cellIndex);
+        }
+
+        private void nextMine(List<CellPosition> cells, int startIndex, int remainingMinesCount, int cellIndex) {
+            if (remainingMinesCount == 0) {
+                processCell(cellIndex + 1);
+            } else {
+                for (int i = startIndex; !isHopeless() && i <= cells.size() - remainingMinesCount; i++) {
+                    CellPosition pos = cells.get(i);
+                    board.setMine(pos.x, pos.y);
+                    mines.push(pos);
+
+                    if (board.isValid()) {
+                        if (remainingMinesCount > 1) {
+                            // there are more mines to set up. keep going
+                            nextMine(cells, i + 1, remainingMinesCount - 1, cellIndex);
+                        } else {
+                            // this was the last mine for current cell. proceed to the next cell now
+                            processCell(cellIndex + 1);
+                        }
+                    }
+
+                    // undo the last change
+                    mines.pop();
+                    board.setUnknown(pos.x, pos.y);
+                    board.setValid(true);
+                }
+            }
+        }
+
+        private void saveResult() {
+            if (bruteForcedCells == null) {
+                bruteForcedCells = new AssumedCells(new HashSet<>(mines), new HashSet<>(allUnknownCells));
+            } else {
+                bruteForcedCells.mines.retainAll(mines);
+            }
+            bruteForcedCells.numbers.removeAll(mines);
+        }
+
+        private boolean isHopeless() {
+            return bruteForcedCells != null && bruteForcedCells.mines.isEmpty() && bruteForcedCells.numbers.isEmpty();
+        }
+    }
+
+    static class AssumedCells {
+        Set<CellPosition> mines;
+        Set<CellPosition> numbers;
+
+        AssumedCells(Set<CellPosition> mines, Set<CellPosition> numbers) {
+            this.mines = mines;
+            this.numbers = numbers;
+        }
+    }
+
+    private void iterateCells(CellFilterFunction filterFunction, Consumer<CellPosition> cellConsumer, boolean stopOnChange) {
+        for (int x = 0; x < board.getWidth(); x++) {
+            for (int y = 0; y < board.getHeight(); y++) {
+                if (!filterFunction.test(x, y)) {
+                    continue;
+                }
+
+                CellPosition cellPosition = new CellPosition(x, y);
+                if (!finishedCells.contains(cellPosition)) {
+                    cellConsumer.accept(cellPosition);
+                    if (stopOnChange && board.isChanged()) {
+                        return;
+                    }
+                }
+            }
+        }
+    }
+
+    private void processCell(CellPosition cellPos) {
+        CellData cellData = new CellData(board, cellPos);
+        if (cellData.remainingMinesCount == 0) {
+            openAll(cellData.unknownCells);
+        } else if (cellData.remainingMinesCount == cellData.unknownCells.size()) {
+            markMines(cellData.unknownCells);
+        }
+
+        if (cellData.unknownCells.size() == 0) {
+            finishedCells.add(cellPos);
+        }
+    }
+
+    private void openAll(Collection<CellPosition> list) {
+        list.forEach(pos ->
+                board.setNumber(pos.x, pos.y, cellValueProvider.applyAsInt(pos))
+        );
+        list.clear();
+    }
+
+    private void markMines(Collection<CellPosition> list) {
+        list.forEach(pos ->
+                board.setMine(pos.x, pos.y)
+        );
+        list.clear();
+    }
+
+    private void processSurroundingCells(CellPosition center) {
+        CellData centerCD = new CellData(board, center);
+
+        // all number cells within the 5x5 area around the center cell are candidates to be processed here
+        SurroundingCells surroundingCells = new SurroundingCells(center.x, center.y, board.getWidth(), board.getHeight(), 2);
+        for (CellPosition nearbyCell : surroundingCells) {
+            if (nearbyCell.equals(center) || !board.isNumber(nearbyCell.x, nearbyCell.y)) {
+                continue;
+            }
+
+            CellData nearbyCD = new CellData(board, nearbyCell);
+            if (centerCD.unknownCells.size() > 0 && nearbyCD.unknownCells.containsAll(centerCD.unknownCells)) {
+                // Current cell is touching all the unknown cells of the provided cell.
+                // This means that we can make some decisions based on that info.
+
+                nearbyCD.unknownCells.removeAll(centerCD.unknownCells);
+                if (nearbyCD.unknownCells.isEmpty()) {
+                    continue;
+                }
+
+                if (nearbyCD.remainingMinesCount == 1) {
+                    // Only one mine left, and it will definitely be one of the centerCD.unknownCells
+                    // We can safely open all other UNKNOWN cells
+                    openAll(nearbyCD.unknownCells);
+                } else if (centerCD.remainingMinesCount == 1) {
+                    if (nearbyCD.unknownCells.size() == nearbyCD.remainingMinesCount - 1) {
+                        // all the remaining UNKNOWN cells are actually MINEs
+                        markMines(nearbyCD.unknownCells);
+                    } else if (nearbyCD.unknownCells.size() > nearbyCD.remainingMinesCount - 1) {
+                        // so we know where one MINE is going to be, but this is not enough;
+                        // try to look at nearby number cells to find out more;
+                        CellData nearbyCopyCD = new CellData(nearbyCD);  // to prevent unwanted changes
+                        nearbyCopyCD.numberCells.remove(center);
+                        for (CellPosition numberCell : nearbyCopyCD.numberCells) {
+                            //TODO: how to remove the duplication here?
+                            CellData numberCD = new CellData(board, numberCell);
+                            if (numberCD.unknownCells.size() > 0 && nearbyCopyCD.unknownCells.containsAll(numberCD.unknownCells)) {
+                                nearbyCopyCD.unknownCells.removeAll(numberCD.unknownCells);
+                                if (nearbyCopyCD.unknownCells.isEmpty()) {
+                                    continue;
+                                }
+                                if (nearbyCopyCD.remainingMinesCount == 2) {
+                                    openAll(nearbyCopyCD.unknownCells);
+                                    break;
+                                } else if (numberCD.remainingMinesCount == 1 && nearbyCopyCD.unknownCells.size() == nearbyCopyCD.remainingMinesCount - 2) {
+                                    markMines(nearbyCopyCD.unknownCells);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // TODO: remove if still not used..
+    private boolean isTouchingAll(CellPosition cellPosition, List<CellPosition> unknownCells) {
+        for (CellPosition unknownCell : unknownCells) {
+            if (Math.abs(unknownCell.x - cellPosition.x) > 1 || Math.abs(unknownCell.y - cellPosition.y) > 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+@FunctionalInterface
+interface CellFilterFunction {
+    boolean test(int x, int y);
+}
+
+class SurroundingCells implements Iterable<CellPosition> {
+    private final int xMin;
+    private final int xMax;
+    private final int yMin;
+    private final int yMax;
+
+    SurroundingCells(int x, int y, int boardWidth, int boardHeight, int radius) {
+        xMin = Math.max(x - radius, 0);
+        xMax = Math.min(x + radius, boardWidth - 1);
+        yMin = Math.max(y - radius, 0);
+        yMax = Math.min(y + radius, boardHeight - 1);
+    }
+
+    @Override
+    public Iterator<CellPosition> iterator() {
+        return new AreaIterator();
+    }
+
+    class AreaIterator implements Iterator<CellPosition> {
+
+        private int x = SurroundingCells.this.xMin;
+        private int y = SurroundingCells.this.yMin;
+
+        @Override
+        public boolean hasNext() {
+            return x <= xMax && y <= yMax;
+        }
+
+        @Override
+        public CellPosition next() {
+            if (hasNext()) {
+                CellPosition result = new CellPosition(x, y);
+                if (++y > yMax) {
+                    y = yMin;
+                    x++;
+                }
+                return result;
+            }
+
+            return null;
+        }
+    }
+}
