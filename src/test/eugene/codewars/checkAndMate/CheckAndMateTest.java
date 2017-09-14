@@ -25,6 +25,18 @@ public class CheckAndMateTest {
     }
 
     @Test
+    public void test_isCheck_NoThreat() {
+        PieceConfig[] game = new PieceConfig[]{
+                new PieceConfig("king", 1, 4, 0),
+                new PieceConfig("king", 0, 4, 4),
+                new PieceConfig("pawn", 1, 5, 5)
+        };
+        OutputBoard.print(game);
+        Set<PieceConfig> expected = Collections.emptySet();
+        assertEquals("No threat", expected, CheckAndMate.isCheck(game, 0));
+    }
+
+    @Test
     public void test_isCheck_RookThreatensKing() {
         PieceConfig[] game = new PieceConfig[]{
                 new PieceConfig("king", 1, 4, 0),

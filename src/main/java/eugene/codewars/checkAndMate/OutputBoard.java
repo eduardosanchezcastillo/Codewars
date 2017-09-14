@@ -37,36 +37,19 @@ class OutputBoard {
     }
 
     private static char print(String piece, int owner) {
-        if (owner == 0) {
-            switch (piece) {
-                case "pawn":
-                    return '♙';
-                case "rook":
-                    return '♖';
-                case "knight":
-                    return '♘';
-                case "bishop":
-                    return '♗';
-                case "queen":
-                    return '♕';
-                case "king":
-                    return '♔';
-            }
-        } else if (owner == 1) {
-            switch (piece) {
-                case "pawn":
-                    return '♟';
-                case "rook":
-                    return '♜';
-                case "knight":
-                    return '♞';
-                case "bishop":
-                    return '♝';
-                case "queen":
-                    return '♛';
-                case "king":
-                    return '♚';
-            }
+        switch (piece) {
+            case "pawn":
+                return owner == 0 ? '♙' : '♟';
+            case "rook":
+                return owner == 0 ? '♖' : '♜';
+            case "knight":
+                return owner == 0 ? '♘' : '♞';
+            case "bishop":
+                return owner == 0 ? '♗' : '♝';
+            case "queen":
+                return owner == 0 ? '♕' : '♛';
+            case "king":
+                return owner == 0 ? '♔' : '♚';
         }
         throw new RuntimeException("Unhandled piece!");
     }
