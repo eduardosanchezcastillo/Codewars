@@ -1,25 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fd3422f-ed5d-464a-924b-d1939c4dc66a" name="Default" comment="Fully implemented &quot;CheckAndMate.isCheck&quot; logic.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/Board.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/Move.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/Position.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/Rules.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/Target.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/TargetTrace.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/_description.txt" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Codewars/eugene/codewars/mineSweeper/description.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Codewars/eugene/codewars/replWithFunctions/description.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/Codewars/eugene/codewars/whitespace/description.txt" afterPath="" />
+    <list default="true" id="4fd3422f-ed5d-464a-924b-d1939c4dc66a" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/Calculator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/eugene/codewars/CalculatorTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/CheckAndMate.java" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/CheckAndMate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/OutputBoard.java" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/OutputBoard.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/PieceConfig.java" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/PieceConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/eugene/codewars/checkAndMate/CheckAndMateTest.java" afterPath="$PROJECT_DIR$/src/test/eugene/codewars/checkAndMate/CheckAndMateTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/eugene/codewars/mineSweeper/description.txt" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/mineSweeper/_description.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/eugene/codewars/replWithFunctions/description.txt" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/replWithFunctions/_description.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/eugene/codewars/whitespace/description.txt" afterPath="$PROJECT_DIR$/src/main/java/eugene/codewars/whitespace/_description.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,103 +19,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CheckAndMate.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/CheckAndMate.java">
+      <file leaf-file-name="MathEvaluator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/MathEvaluator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="7" column="71" lean-forward="false" selection-start-line="7" selection-start-column="71" selection-end-line="7" selection-end-column="71" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Move.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/Move.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/Board.java">
+      <file leaf-file-name="Calculator.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/Calculator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="64" column="14" lean-forward="false" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OutputBoard.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/OutputBoard.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PieceConfig.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/PieceConfig.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="21" column="4" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Position.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/Position.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="2" column="6" lean-forward="false" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Rules.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/Rules.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="5" column="6" lean-forward="false" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Target.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/Target.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="10" column="48" lean-forward="true" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TargetTrace.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/TargetTrace.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CheckAndMateTest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/eugene/codewars/checkAndMate/CheckAndMateTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="408" column="9" lean-forward="true" selection-start-line="408" selection-start-column="9" selection-end-line="408" selection-end-column="9" />
+            <state relative-caret-position="560">
+              <caret line="35" column="4" lean-forward="false" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -144,8 +47,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="JUnit4 Test Class" />
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
@@ -214,8 +117,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/test/eugene/codewars/NextSmallerNumberTest.java" />
-        <option value="$PROJECT_DIR$/src/eugene/codewars/NextSmallerNumber.java" />
         <option value="$PROJECT_DIR$/src/eugene/codewars/CountRobots.java" />
         <option value="$PROJECT_DIR$/src/eugene/codewars/MathEvaluator.java" />
         <option value="$PROJECT_DIR$/src/eugene/codewars/replWithFunctions/description.txt" />
@@ -265,6 +166,8 @@
         <option value="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/PieceConfig.java" />
         <option value="$PROJECT_DIR$/src/test/eugene/codewars/checkAndMate/CheckAndMateTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/CheckAndMate.java" />
+        <option value="$PROJECT_DIR$/src/test/eugene/codewars/CalculatorTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/eugene/codewars/Calculator.java" />
       </list>
     </option>
   </component>
@@ -347,8 +250,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -382,19 +283,12 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="codewars" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Proj1" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Codewars" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="codewars" type="462c0819:PsiDirectoryNode" />
-              <item name="checkAndMate" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -416,8 +310,8 @@
       <recent name="eugene.codewars" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="eugene.codewars.checkAndMate" />
       <recent name="eugene.codewars" />
+      <recent name="eugene.codewars.checkAndMate" />
       <recent name="eugene.codewars.repl" />
       <recent name="eugene.codewars.mineSweeper" />
     </key>
@@ -451,7 +345,57 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CheckAndMateTest">
+  <component name="RunManager" selected="JUnit.CalculatorTest">
+    <configuration name="CalculatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="eugene.codewars.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Codewars" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="eugene.codewars" />
+      <option name="MAIN_CLASS_NAME" value="eugene.codewars.CalculatorTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration name="CalculatorTest.floats" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="eugene.codewars.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="Codewars" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="eugene.codewars" />
+      <option name="MAIN_CLASS_NAME" value="eugene.codewars.CalculatorTest" />
+      <option name="METHOD_NAME" value="floats" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
     <configuration name="CheckAndMateTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -477,31 +421,6 @@
       <envs />
       <patterns />
     </configuration>
-    <configuration name="CheckAndMateTest.test_mate2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="eugene.codewars.checkAndMate.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Codewars" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="eugene.codewars.checkAndMate" />
-      <option name="MAIN_CLASS_NAME" value="eugene.codewars.checkAndMate.CheckAndMateTest" />
-      <option name="METHOD_NAME" value="test_mate2" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
     <configuration name="CheckAndMateTest.test_mate3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -515,31 +434,6 @@
       <option name="PACKAGE_NAME" value="eugene.codewars.checkAndMate" />
       <option name="MAIN_CLASS_NAME" value="eugene.codewars.checkAndMate.CheckAndMateTest" />
       <option name="METHOD_NAME" value="test_mate3" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-    </configuration>
-    <configuration name="CheckAndMateTest.test_noMate1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="eugene.codewars.checkAndMate.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="Codewars" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="eugene.codewars.checkAndMate" />
-      <option name="MAIN_CLASS_NAME" value="eugene.codewars.checkAndMate.CheckAndMateTest" />
-      <option name="METHOD_NAME" value="test_noMate1" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -718,18 +612,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest.test_noMate1" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest.test_mate2" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest.test_noMate3" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest.test_mate3" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest.test_noMate3" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest.test_mate3" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.CalculatorTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.CalculatorTest.floats" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest.test_mate3" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest.test_noMate3" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest.test_mate2" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest.test_noMate1" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.CalculatorTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.CalculatorTest.floats" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest.test_mate3" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.CheckAndMateTest.test_noMate3" />
       </list>
     </recent_temporary>
   </component>
@@ -765,30 +659,37 @@
       <option name="project" value="LOCAL" />
       <updated>1505386085245</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Passed all tests.">
+      <created>1505474995482</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1505474995482</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="CheckAndMateTest - 2017.09.15 at 13h 59m 12s.xml">
-      <configuration name="CheckAndMateTest" configurationId="JUnit" />
+    <history-entry file="CalculatorTest - 2017.09.15 at 21h 03m 42s.xml">
+      <configuration name="CalculatorTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CheckAndMateTest - 2017.09.15 at 14h 07m 05s.xml">
-      <configuration name="CheckAndMateTest" configurationId="JUnit" />
+    <history-entry file="CalculatorTest - 2017.09.15 at 21h 08m 51s.xml">
+      <configuration name="CalculatorTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CheckAndMateTest - 2017.09.15 at 14h 08m 29s.xml">
-      <configuration name="CheckAndMateTest" configurationId="JUnit" />
+    <history-entry file="CalculatorTest - 2017.09.15 at 21h 11m 37s.xml">
+      <configuration name="CalculatorTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CheckAndMateTest - 2017.09.15 at 14h 09m 02s.xml">
-      <configuration name="CheckAndMateTest" configurationId="JUnit" />
+    <history-entry file="CalculatorTest - 2017.09.15 at 21h 14m 20s.xml">
+      <configuration name="CalculatorTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CheckAndMateTest - 2017.09.15 at 14h 21m 59s.xml">
-      <configuration name="CheckAndMateTest" configurationId="JUnit" />
+    <history-entry file="CalculatorTest - 2017.09.15 at 21h 15m 26s.xml">
+      <configuration name="CalculatorTest" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CheckAndMateTest - 2017.09.15 at 14h 23m 18s.xml">
-      <configuration name="CheckAndMateTest" configurationId="JUnit" />
+    <history-entry file="CalculatorTest_floats - 2017.09.15 at 21h 05m 34s.xml">
+      <configuration name="CalculatorTest.floats" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="CheckAndMateTest - 2017.09.15 at 14h 25m 32s.xml">
-      <configuration name="CheckAndMateTest" configurationId="JUnit" />
+    <history-entry file="CalculatorTest_floats - 2017.09.15 at 21h 08m 48s.xml">
+      <configuration name="CalculatorTest.floats" configurationId="JUnit" />
     </history-entry>
     <history-entry file="CheckAndMateTest - 2017.09.15 at 14h 26m 56s.xml">
       <configuration name="CheckAndMateTest" configurationId="JUnit" />
@@ -820,11 +721,11 @@
       <window_info id="DB Execution Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18710022" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33586955" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33586955" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32934782" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22334754" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22547974" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39891306" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -876,7 +777,8 @@
     <MESSAGE value="Initial commint of CheckAndMate" />
     <MESSAGE value="Implemented helper classes, that should've been provided by Codewars" />
     <MESSAGE value="Fully implemented &quot;CheckAndMate.isCheck&quot; logic." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fully implemented &quot;CheckAndMate.isCheck&quot; logic." />
+    <MESSAGE value="Passed all tests." />
+    <option name="LAST_COMMIT_MESSAGE" value="Passed all tests." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -888,7 +790,7 @@
           <option name="timeStamp" value="57" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="128" />
+      <option name="time" value="130" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="JUnit">
@@ -901,34 +803,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/js/jsonAccountUpdater.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="84" column="1" lean-forward="false" selection-start-line="84" selection-start-column="1" selection-end-line="84" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/eugene/codewars/PaintfuckTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/Paintfuck.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="89" column="19" lean-forward="true" selection-start-line="89" selection-start-column="19" selection-end-line="89" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/eugene/codewars/SmallfuckTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="0" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/Smallfuck.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="479">
@@ -1165,7 +1039,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1180,16 +1053,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3584">
           <caret line="263" column="26" lean-forward="false" selection-start-line="263" selection-start-column="26" selection-end-line="263" selection-end-column="26" />
-          <folding>
-            <element signature="e#8972#8973#0" expanded="false" />
-            <element signature="e#9006#9007#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
+        <state relative-caret-position="1024">
           <caret line="64" column="14" lean-forward="false" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
           <folding />
         </state>
@@ -1197,7 +1066,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/CheckAndMate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
+        <state relative-caret-position="96">
           <caret line="7" column="71" lean-forward="false" selection-start-line="7" selection-start-column="71" selection-end-line="7" selection-end-column="71" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1215,15 +1084,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/OutputBoard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="15" column="9" lean-forward="true" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+        <state relative-caret-position="240">
+          <caret line="15" column="9" lean-forward="false" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/PieceConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
+        <state relative-caret-position="336">
           <caret line="21" column="4" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
           <folding />
         </state>
@@ -1248,7 +1117,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/Target.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
-          <caret line="10" column="48" lean-forward="true" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
+          <caret line="10" column="48" lean-forward="false" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
           <folding />
         </state>
       </provider>
@@ -1256,7 +1125,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/checkAndMate/TargetTrace.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
-          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1264,7 +1133,43 @@
     <entry file="file://$PROJECT_DIR$/src/test/eugene/codewars/checkAndMate/CheckAndMateTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="344">
-          <caret line="408" column="9" lean-forward="true" selection-start-line="408" selection-start-column="9" selection-end-line="408" selection-end-column="9" />
+          <caret line="408" column="9" lean-forward="false" selection-start-line="408" selection-start-column="9" selection-end-line="408" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/util/function/DoubleBinaryOperator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="39" column="17" lean-forward="false" selection-start-line="39" selection-start-column="17" selection-end-line="39" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/eugene/codewars/CalculatorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/MathEvaluator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/eugene/codewars/Calculator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="35" column="4" lean-forward="false" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
