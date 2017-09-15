@@ -16,10 +16,10 @@ class OutputBoard {
         }
 
         StringBuilder sb = new StringBuilder();
-        sb.append("   0  1  2  3  4  5  6  7\n");  // NOTE: a wide-space is used here: ' ', U+2003
         sb.append("   A  B  C  D  E  F  G  H\n");  // NOTE: a wide-space is used here: ' ', U+2003
+        sb.append("   0  1  2  3  4  5  6  7\n");  // NOTE: a wide-space is used here: ' ', U+2003
         for (int i = 0; i < board.length; i++) {
-            sb.append(i + 1)
+            sb.append(i)
                     .append(' ')
                     .append(String.join("", board[i]))
                     .append('\n');

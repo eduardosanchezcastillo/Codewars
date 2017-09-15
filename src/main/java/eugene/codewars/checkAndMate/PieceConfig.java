@@ -39,11 +39,11 @@ class PieceConfig {
         return y;
     }
 
-    private boolean hasPrevious() {
+    boolean hasPrevious() {
         return prevX != NO_VALUE && prevY != NO_VALUE;
     }
 
-    // will throw a RuntimeException if invoked for an object that do not have informations about its previous move.
+    // will throw a RuntimeException if invoked for an object that do not have information about its previous move.
     int getPrevX() {
         if (hasPrevious()) {
             return prevX;
@@ -51,7 +51,7 @@ class PieceConfig {
         throw new RuntimeException("No previous!");
     }
 
-    // will throw a RuntimeException if invoked for an object that do not have informations about its previous move.
+    // will throw a RuntimeException if invoked for an object that do not have information about its previous move.
     int getPrevY() {
         if (hasPrevious()) {
             return prevY;
