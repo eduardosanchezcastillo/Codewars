@@ -5,7 +5,7 @@ package eugene.codewars.skyscrappers;
     https://www.codewars.com/kata/4-by-4-skyscrapers
 
     6 By 6 Skyscrapers
-    https://www.codewars.com/kata/6-by-6-skyscrapers/java
+    https://www.codewars.com/kata/6-by-6-skyscrapers
 
     NOTE: this solution works for any field size. Just change the static constant.
     The description below is for 4x4, but it is pretty much identical for 6x6.
