@@ -2,7 +2,7 @@ package eugene.codewars.pathFinder;
 
 /*
     Path Finder #2: shortest path
-    https://www.codewars.com/kata/path-finder-number-2-shortest-path/train
+    https://www.codewars.com/kata/path-finder-number-2-shortest-path
 
     TASK:
 
